@@ -14,7 +14,6 @@ class Expression :
         elif op == "+":
             return a + b
 
-
     #   Takes expressions with brackets and evaluates the brackets to produce an equiv. bracketless expression.
     def expand_brackets (self):
         '''IN PLACE operation to remove brackets from an expression.'''
@@ -56,7 +55,6 @@ class Expression :
 
         return int(self.expr[0])
 
-
     #   Part One computes expressions without precedence, therefore calls evaluate_lr 
     def evaluate (self):
         return self.evaluate_lr() 
@@ -94,7 +92,6 @@ class ExpressionPrecedence (Expression) :
 
         return int(self.expr[0])
 
-
     def expand_brackets(self):
         '''IN PLACE operation to remove brackets from an expression.'''
         if "(" not in self.expr:
@@ -117,14 +114,15 @@ class ExpressionPrecedence (Expression) :
     def evaluate (self):
         return self.evaluate_precedence()
 
-
+#########################################################################
 
 #   Puzzle Input
 with open("day18input.txt", "r") as file:
     data = file.read().split("\n")
 
 
-# #   PART ONE
+# #   PART ONE  # #
+
 expressions = [ expr.replace(" ", "") for expr in data ] # remove spaces in the expressions
 expressions = [ Expression(expr) for expr in expressions ]
 
@@ -140,13 +138,14 @@ for expr in expressions:
 print("The solution to Part One is", total1)
 
 
-#   PART TWO
+# #  PART TWO  # #
+
 expressions = [ expr.replace(" ", "") for expr in data ] # remove spaces in the expressions
 expressions = [ ExpressionPrecedence(expr) for expr in expressions ]
 
 for expr in expressions:
     expr.expand_brackets() # evaluate brackets in the expression
-    expr.evaluate() # evaluate the expression left to right
+    expr.evaluate() # evaluate the expression left to right with precendence for addition
 
 total1 = 0
 for expr in expressions:
